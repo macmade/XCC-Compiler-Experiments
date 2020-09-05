@@ -1,0 +1,119 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05B9BE8E2503B63F0074714F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		05B9BE902503B63F0074714F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05B9BE832503B61A0074714F = {
+			isa = PBXGroup;
+			children = (
+				05B9BE902503B63F0074714F /* README.md */,
+				05B9BE8E2503B63F0074714F /* LICENSE */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		05B9BE882503B61A0074714F /* XCC-Compiler-Experiments */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 05B9BE8B2503B61A0074714F /* Build configuration list for PBXLegacyTarget "XCC-Compiler-Experiments" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+			);
+			name = "XCC-Compiler-Experiments";
+			passBuildSettingsInEnvironment = 1;
+			productName = XCC;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		05B9BE842503B61A0074714F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1170;
+				ORGANIZATIONNAME = "XS-Labs";
+				TargetAttributes = {
+					05B9BE882503B61A0074714F = {
+						CreatedOnToolsVersion = 11.7;
+					};
+				};
+			};
+			buildConfigurationList = 05B9BE872503B61A0074714F /* Build configuration list for PBXProject "XCC-Compiler-Experiments" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05B9BE832503B61A0074714F;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05B9BE882503B61A0074714F /* XCC-Compiler-Experiments */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		05B9BE892503B61A0074714F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		05B9BE8A2503B61A0074714F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		05B9BE8C2503B61A0074714F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		05B9BE8D2503B61A0074714F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05B9BE872503B61A0074714F /* Build configuration list for PBXProject "XCC-Compiler-Experiments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B9BE892503B61A0074714F /* Debug */,
+				05B9BE8A2503B61A0074714F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05B9BE8B2503B61A0074714F /* Build configuration list for PBXLegacyTarget "XCC-Compiler-Experiments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B9BE8C2503B61A0074714F /* Debug */,
+				05B9BE8D2503B61A0074714F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05B9BE842503B61A0074714F /* Project object */;
+}
