@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		0547304C25044879000E7E86 /* make */ = {isa = PBXFileReference; lastKnownFileType = folder; path = make; sourceTree = "<group>"; };
+		0547304D25044883000E7E86 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		0547304E25044C21000E7E86 /* projects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = projects; sourceTree = "<group>"; };
 		05B9BE8E2503B63F0074714F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		05B9BE902503B63F0074714F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -17,6 +20,9 @@
 			children = (
 				05B9BE902503B63F0074714F /* README.md */,
 				05B9BE8E2503B63F0074714F /* LICENSE */,
+				0547304D25044883000E7E86 /* Makefile */,
+				0547304C25044879000E7E86 /* make */,
+				0547304E25044C21000E7E86 /* projects */,
 			);
 			sourceTree = "<group>";
 		};
