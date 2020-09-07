@@ -34,22 +34,22 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
+
 void Print( FILE * fh, const char * level, const char * fmt, va_list ap );
 void Print( FILE * fh, const char * level, const char * fmt, va_list ap )
 {
     fprintf( fh, "*** [ %s ]> [ #%zu ]> ", level, Lexer_GetLine() );
-    
-    #ifdef __clang__
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wformat-nonliteral"
-    #endif
     vfprintf( fh, fmt, ap );
-    #ifdef __clang__
-    #pragma clang diagnostic pop
-    #endif
-    
     fprintf( fh, "\n" );
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 void Error( const char * fmt, ... )
 {
