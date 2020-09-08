@@ -66,7 +66,7 @@ void Parser_Statements( void )
 }
 
 /*
- * declaration -> qualifiers type pointer identifier array
+ * declaration -> qualifiers type pointer id_or_pointer_id array
  */
 bool Parser_Declaration( void )
 {
@@ -80,7 +80,7 @@ bool Parser_Declaration( void )
     return Parser_Qualifiers( qualifiers, &size )
         && Parser_Type( qualifiers, size )
         && Parser_Pointers()
-        && Parser_ID()
+        && Parser_IDOrPointerID()
         && Parser_Array( NULL );
 }
 
@@ -238,6 +238,17 @@ bool Parser_Type( Qualifier * qualifiers, size_t size )
     return false;
 }
 
+/* id_or_pointer_id -> pointer_id | identifier */
+bool Parser_IDOrPointerID( void )
+{
+    if( Lexer_Match( TokenLeftParenthesis ) )
+    {
+        return Parser_PointerID();
+    }
+
+    return Parser_ID();
+}
+
 /*
  * identifier -> ID
  */
@@ -263,6 +274,38 @@ bool Parser_ID( void )
 
             return false;
         }
+    }
+
+    Lexer_Advance();
+
+    return true;
+}
+
+/* pointer_id -> LEFT_PARENTHESIS pointers identifier RIGHT_PARENTHESIS */
+bool Parser_PointerID( void )
+{
+    if( Lexer_Match( TokenLeftParenthesis ) == false )
+    {
+        return false;
+    }
+
+    Lexer_Advance();
+
+    if( Parser_Pointers() == false )
+    {
+        return false;
+    }
+
+    if( Parser_ID() == false )
+    {
+        return false;
+    }
+
+    if( Lexer_Match( TokenRightParenthesis ) == false )
+    {
+        Error( "Expected )" );
+
+        return false;
     }
 
     Lexer_Advance();

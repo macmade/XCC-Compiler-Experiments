@@ -47,7 +47,9 @@ bool Parser_Declaration( void );
 bool Parser_Qualifiers( Qualifier * qualifiers, size_t * size );
 bool Parser_Pointers( void );
 bool Parser_Type( Qualifier * qualifiers, size_t size );
+bool Parser_IDOrPointerID( void );
 bool Parser_ID( void );
+bool Parser_PointerID( void );
 bool Parser_Array( int * size );
 bool Parser_ValidQualifiers( const char * type, Qualifier * qualifiers, size_t size );
 
