@@ -41,8 +41,7 @@ typedef enum
     TokenSemicolon = 1, /* ; */
     TokenType      = 2, /* Type */
     TokenID        = 3  /* Identifier */
-}
-Token;
+} Token;
 
 const char * Lexer_GetText( void );
 size_t       Lexer_GetLength( void );

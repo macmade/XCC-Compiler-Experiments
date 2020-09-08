@@ -45,8 +45,7 @@ typedef enum
     TokenSize      = 5, /* short, long, long long */
     TokenType      = 6, /* Type */
     TokenID        = 7  /* Identifier */
-}
-Token;
+} Token;
 
 const char * Lexer_GetText( void );
 size_t       Lexer_GetLength( void );

@@ -43,9 +43,9 @@ void Parser_Statements( void )
     while( Lexer_Match( TokenEnd ) == false )
     {
         const char * tmp;
-        
+
         tmp = Parser_Expression();
-        
+
         if( Lexer_Match( TokenSemicolon ) )
         {
             Lexer_Advance();
@@ -54,7 +54,7 @@ void Parser_Statements( void )
         {
             Warning( "Inserting missing semicolon" );
         }
-        
+
         Name_FreeName( tmp );
     }
 }
@@ -66,27 +66,27 @@ void Parser_Statements( void )
 const char * Parser_Expression( void )
 {
     const char * tmp1;
-    
+
     if( Lexer_LegalLookahead( TokenNumericOrID, TokenLeftParenthesis, TokenEnd ) == false )
     {
         return NULL;
     }
-    
+
     tmp1 = Parser_Term();
-    
+
     while( Lexer_Match( TokenAdd ) )
     {
         const char * tmp2;
-         
+
         Lexer_Advance();
-        
+
         tmp2 = Parser_Term();
-        
+
         Debug( "%s += %s", tmp1, tmp2 );
-        
+
         Name_FreeName( tmp2 );
     }
-    
+
     return tmp1;
 }
 
@@ -97,27 +97,27 @@ const char * Parser_Expression( void )
 const char * Parser_Term( void )
 {
     const char * tmp1;
-    
+
     if( Lexer_LegalLookahead( TokenNumericOrID, TokenLeftParenthesis, TokenEnd ) == false )
     {
         return NULL;
     }
-    
+
     tmp1 = Parser_Factor();
-    
+
     while( Lexer_Match( TokenMultiply ) )
     {
         const char * tmp2;
-        
+
         Lexer_Advance();
-        
+
         tmp2 = Parser_Factor();
-        
+
         Debug( "%s *= %s", tmp1, tmp2 );
-        
+
         Name_FreeName( tmp2 );
     }
-    
+
     return tmp1;
 }
 
@@ -125,14 +125,14 @@ const char * Parser_Term( void )
 const char * Parser_Factor( void )
 {
     const char * tmp;
-    
+
     tmp = NULL;
-    
+
     if( Lexer_LegalLookahead( TokenNumericOrID, TokenLeftParenthesis, TokenEnd ) == false )
     {
         return NULL;
     }
-    
+
     if( Lexer_Match( TokenNumericOrID ) )
     {
         Debug( "%s = %1.*s", tmp = Name_NewName(), Lexer_GetLength(), Lexer_GetText() );
@@ -141,9 +141,9 @@ const char * Parser_Factor( void )
     else if( Lexer_Match( TokenLeftParenthesis ) )
     {
         Lexer_Advance();
-        
+
         tmp = Parser_Expression();
-        
+
         if( Lexer_Match( TokenRightParenthesis ) )
         {
             Lexer_Advance();
@@ -157,6 +157,6 @@ const char * Parser_Factor( void )
     {
         Error( "Number or identifier expected" );
     }
-    
+
     return tmp;
 }

@@ -42,7 +42,7 @@ void Parser_Statements( void )
     while( Lexer_Match( TokenEnd ) == false )
     {
         Parser_Expression();
-        
+
         if( Lexer_Match( TokenSemicolon ) )
         {
             Lexer_Advance();
@@ -64,9 +64,9 @@ void Parser_Expression( void )
     {
         return;
     }
-    
+
     Parser_Term();
-    
+
     while( Lexer_Match( TokenAdd ) )
     {
         Lexer_Advance();
@@ -84,9 +84,9 @@ void Parser_Term( void )
     {
         return;
     }
-    
+
     Parser_Factor();
-    
+
     while( Lexer_Match( TokenMultiply ) )
     {
         Lexer_Advance();
@@ -101,7 +101,7 @@ void Parser_Factor( void )
     {
         return;
     }
-    
+
     if( Lexer_Match( TokenNumericOrID ) )
     {
         Lexer_Advance();
@@ -110,7 +110,7 @@ void Parser_Factor( void )
     {
         Lexer_Advance();
         Parser_Expression();
-        
+
         if( Lexer_Match( TokenRightParenthesis ) )
         {
             Lexer_Advance();

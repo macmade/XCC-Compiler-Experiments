@@ -54,7 +54,7 @@ void Print( FILE * fh, const char * level, const char * fmt, va_list ap )
 void Error( const char * fmt, ... )
 {
     va_list ap;
-    
+
     va_start( ap, fmt );
     Print( stderr, "ERROR", fmt, ap );
     va_end( ap );
@@ -63,7 +63,7 @@ void Error( const char * fmt, ... )
 void Warning( const char * fmt, ... )
 {
     va_list ap;
-    
+
     va_start( ap, fmt );
     Print( stderr, "WARNING", fmt, ap );
     va_end( ap );
@@ -72,7 +72,7 @@ void Warning( const char * fmt, ... )
 void Debug( const char * fmt, ... )
 {
     va_list ap;
-    
+
     va_start( ap, fmt );
     Print( stdout, "DEBUG", fmt, ap );
     va_end( ap );

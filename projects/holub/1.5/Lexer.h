@@ -37,15 +37,14 @@
 
 typedef enum
 {
-    TokenEnd              = 0,  /* End of input */
-    TokenSemicolon        = 1,  /* ; */
-    TokenAdd              = 2,  /* + */
-    TokenMultiply         = 3,  /* * */
-    TokenLeftParenthesis  = 4,  /* ( */
-    TokenRightParenthesis = 5,  /* ) */
-    TokenNumericOrID      = 6   /* Decimal number or identifier */
-}
-Token;
+    TokenEnd              = 0, /* End of input */
+    TokenSemicolon        = 1, /* ; */
+    TokenAdd              = 2, /* + */
+    TokenMultiply         = 3, /* * */
+    TokenLeftParenthesis  = 4, /* ( */
+    TokenRightParenthesis = 5, /* ) */
+    TokenNumericOrID      = 6  /* Decimal number or identifier */
+} Token;
 
 const char * Lexer_GetText( void );
 size_t       Lexer_GetLength( void );

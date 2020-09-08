@@ -63,64 +63,64 @@ Token Lexer_GetCurrent( void )
 
 Token Lexer_Next( void )
 {
-    static char   buf[ 128 ];
-           char * current;
-    
+    static char buf[ 128 ];
+    char *      current;
+
     current = Lexer_Text + Lexer_Length;
-    
+
     while( true )
     {
         while( *( current ) == 0 )
         {
             current = buf;
-            
+
             if( fgets( buf, sizeof( buf ), stdin ) == NULL )
             {
                 *( current ) = 0;
-                
+
                 return TokenEnd;
             }
-            
+
             Lexer_Line++;
-            
+
             while( isspace( *( current ) ) )
             {
                 current++;
             }
         }
-        
+
         for( ; *( current ) != 0; current++ )
         {
             Lexer_Text   = current;
             Lexer_Length = 1;
-            
+
             switch( *( current ) )
             {
                 case EOF: return TokenEnd;
                 case ';': return TokenSemicolon;
-                
+
                 case '\n':
                 case '\t':
                 case ' ':
-                    
+
                     break;
-                    
+
                 default:
-                    
+
                     if( isalnum( *( current ) ) == false )
                     {
                         Warning( "Ignoring illegal input: %c", *( current ) );
-                        
+
                         break;
                     }
-                    
+
                     while( isalnum( *( current ) ) )
                     {
                         current++;
                     }
-                    
+
                     Lexer_Length = ( uintptr_t )current - ( uintptr_t )Lexer_Text;
-                    
+
                     if( Lexer_Compare( "const" ) )
                     {
                         return TokenConst;
@@ -129,33 +129,19 @@ Token Lexer_Next( void )
                     {
                         return TokenVolatile;
                     }
-                    else if
-                    (
-                          Lexer_Compare( "signed" )
-                       || Lexer_Compare( "unsigned" )
-                    )
+                    else if( Lexer_Compare( "signed" ) || Lexer_Compare( "unsigned" ) )
                     {
                         return TokenSign;
                     }
-                    else if
-                    (
-                          Lexer_Compare( "short" )
-                       || Lexer_Compare( "long" )
-                    )
+                    else if( Lexer_Compare( "short" ) || Lexer_Compare( "long" ) )
                     {
                         return TokenSize;
                     }
-                    else if
-                    (
-                          Lexer_Compare( "char" )
-                       || Lexer_Compare( "int" )
-                       || Lexer_Compare( "float" )
-                       || Lexer_Compare( "double" )
-                    )
+                    else if( Lexer_Compare( "char" ) || Lexer_Compare( "int" ) || Lexer_Compare( "float" ) || Lexer_Compare( "double" ) )
                     {
                         return TokenType;
                     }
-                    
+
                     return TokenID;
             }
         }
@@ -180,7 +166,7 @@ bool Lexer_Match( Token token )
     {
         Lexer_Advance();
     }
-    
+
     return ( int )token == Lexer_Lookahead;
 }
 
@@ -194,12 +180,12 @@ bool Lexer_LegalLookahead( Token first, ... )
     va_list ap;
     bool    ret;
     bool    err;
-    
+
     va_start( ap, first );
-    
+
     err = false;
     ret = false;
-    
+
     if( first == TokenEnd )
     {
         if( Lexer_Match( TokenEnd ) )
@@ -213,15 +199,15 @@ bool Lexer_LegalLookahead( Token first, ... )
         Token   lookaheads[ 16 ];
         Token * p;
         Token * current;
-        
+
         p        = lookaheads;
         *( p++ ) = first;
-        
+
         while( ( token = va_arg( ap, Token ) ) && p < &( lookaheads[ 16 ] ) )
         {
             *( p++ ) = token;
         }
-        
+
         while( Lexer_Match( TokenSemicolon ) == false )
         {
             for( current = lookaheads; current < p; current++ )
@@ -229,25 +215,25 @@ bool Lexer_LegalLookahead( Token first, ... )
                 if( Lexer_Match( *( current ) ) )
                 {
                     ret = true;
-                    
+
                     goto done;
                 }
             }
-            
+
             if( err == false )
             {
                 err = true;
-                
+
                 Error( "Syntax error" );
             }
-            
+
             Lexer_Advance();
         }
     }
-    
-    done:
-        
-        va_end( ap );
-        
-        return ret == true && err == false;
+
+done:
+
+    va_end( ap );
+
+    return ret == true && err == false;
 }

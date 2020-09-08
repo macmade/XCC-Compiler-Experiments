@@ -40,8 +40,7 @@ typedef struct
 {
     Token token;
     char  name[ 128 ];
-}
-Qualifier;
+} Qualifier;
 
 void Parser_Statements( void );
 bool Parser_Declaration( void );

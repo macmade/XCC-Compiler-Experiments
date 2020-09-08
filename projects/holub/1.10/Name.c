@@ -33,7 +33,7 @@
 #include "Print.h"
 #include <stdlib.h>
 
-static const char  * Name_Names[] = { "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7" };
+static const char *  Name_Names[] = { "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7" };
 static const char ** Name_Current = Name_Names;
 
 const char * Name_NewName( void )
@@ -43,7 +43,7 @@ const char * Name_NewName( void )
         Error( "Expression too complex" );
         abort();
     }
-    
+
     return *( Name_Current++ );
 }
 

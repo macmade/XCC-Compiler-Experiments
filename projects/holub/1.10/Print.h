@@ -32,8 +32,8 @@
 #ifndef PRINT_H
 #define PRINT_H
 
-void Error(   const char * fmt, ... );
+void Error( const char * fmt, ... );
 void Warning( const char * fmt, ... );
-void Debug(   const char * fmt, ... );
+void Debug( const char * fmt, ... );
 
 #endif /* PRINT_H */

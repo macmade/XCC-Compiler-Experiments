@@ -38,12 +38,12 @@
 void Parser_Statements( void )
 {
     Parser_Expression();
-    
+
     if( Lexer_Match( TokenEnd ) )
     {
         return;
     }
-    
+
     if( Lexer_Match( TokenSemicolon ) )
     {
         Lexer_Advance();
@@ -52,7 +52,7 @@ void Parser_Statements( void )
     {
         Warning( "Inserting missing semicolon" );
     }
-    
+
     if( Lexer_Match( TokenEnd ) == false )
     {
         Parser_Statements();
@@ -102,7 +102,7 @@ void Parser_Factor( void )
     {
         return;
     }
-    
+
     if( Lexer_Match( TokenNumericOrID ) )
     {
         Lexer_Advance();
@@ -111,7 +111,7 @@ void Parser_Factor( void )
     {
         Lexer_Advance();
         Parser_Expression();
-        
+
         if( Lexer_Match( TokenRightParenthesis ) )
         {
             Lexer_Advance();

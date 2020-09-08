@@ -58,70 +58,70 @@ size_t Lexer_GetLine( void )
 
 Token Lexer_Next( void )
 {
-    static char   buf[ 128 ];
-           char * current;
-    
+    static char buf[ 128 ];
+    char *      current;
+
     current = Lexer_Text + Lexer_Length;
-    
+
     while( true )
     {
         while( *( current ) == 0 )
         {
             current = buf;
-            
+
             if( fgets( buf, sizeof( buf ), stdin ) == NULL )
             {
                 *( current ) = 0;
-                
+
                 return TokenEnd;
             }
-            
+
             Lexer_Line++;
-            
+
             while( isspace( *( current ) ) )
             {
                 current++;
             }
         }
-        
+
         for( ; *( current ) != 0; current++ )
         {
             Lexer_Text   = current;
             Lexer_Length = 1;
-            
+
             switch( *( current ) )
             {
                 case EOF: Debug( "Token: End" ); return TokenEnd;
-                case ';': Debug( "Token: ;" );   return TokenSemicolon;
-                case '+': Debug( "Token: +" );   return TokenAdd;
-                case '*': Debug( "Token: *" );   return TokenMultiply;
-                case '(': Debug( "Token: (" );   return TokenLeftParenthesis;
-                case ')': Debug( "Token: )" );   return TokenRightParenthesis;
-                
+                case ';': Debug( "Token: ;" ); return TokenSemicolon;
+                case '+': Debug( "Token: +" ); return TokenAdd;
+                case '*': Debug( "Token: *" ); return TokenMultiply;
+                case '(': Debug( "Token: (" ); return TokenLeftParenthesis;
+                case ')': Debug( "Token: )" ); return TokenRightParenthesis;
+
                 case '\n':
                 case '\t':
                 case ' ':
-                    
+
                     break;
-                    
+
                 default:
-                    
+
                     if( isalnum( *( current ) ) == false )
                     {
                         Error( "Ignoring illegal input: %c", *( current ) );
-                        
+
                         break;
                     }
-                    
+
                     while( isalnum( *( current ) ) )
                     {
                         current++;
                     }
-                    
+
                     Lexer_Length = ( uintptr_t )current - ( uintptr_t )Lexer_Text;
-                    
+
                     Debug( "Token: %1.*s", Lexer_Length, Lexer_Text );
-                    
+
                     return TokenNumericOrID;
             }
         }
@@ -139,7 +139,7 @@ bool Lexer_Match( Token token )
     {
         Lexer_Advance();
     }
-    
+
     return ( int )token == Lexer_Lookahead;
 }
 
@@ -147,11 +147,11 @@ bool Lexer_LegalLookahead( Token first, ... )
 {
     va_list ap;
     bool    ret;
-    
+
     va_start( ap, first );
-    
+
     ret = false;
-    
+
     if( first == TokenEnd )
     {
         ret = Lexer_Match( TokenEnd );
@@ -163,16 +163,16 @@ bool Lexer_LegalLookahead( Token first, ... )
         Token * p;
         Token * current;
         bool    err;
-        
+
         err      = false;
         p        = lookaheads;
         *( p++ ) = first;
-        
+
         while( ( token = va_arg( ap, Token ) ) != TokenEnd && p < &( lookaheads[ 16 ] ) )
         {
             *( p++ ) = token;
         }
-        
+
         while( Lexer_Match( TokenSemicolon ) == false )
         {
             for( current = lookaheads; current < p; current++ )
@@ -180,25 +180,25 @@ bool Lexer_LegalLookahead( Token first, ... )
                 if( Lexer_Match( *( current ) ) )
                 {
                     ret = true;
-                    
+
                     goto done;
                 }
             }
-            
+
             if( err == false )
             {
                 err = true;
-                
+
                 Error( "Syntax error" );
             }
-            
+
             Lexer_Advance();
         }
     }
-    
-    done:
-        
-        va_end( ap );
-        
-        return ret;
+
+done:
+
+    va_end( ap );
+
+    return ret;
 }

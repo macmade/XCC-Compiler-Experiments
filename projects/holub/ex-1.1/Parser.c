@@ -42,7 +42,7 @@ void Parser_Statements( void )
     while( Lexer_Match( TokenEnd ) == false )
     {
         Parser_Declaration();
-        
+
         if( Lexer_Match( TokenSemicolon ) )
         {
             Lexer_Advance();
@@ -63,7 +63,7 @@ void Parser_Declaration( void )
     {
         return;
     }
-    
+
     Parser_Types();
     Parser_Identifier();
 }
@@ -77,9 +77,9 @@ void Parser_Types( void )
     {
         return;
     }
-    
+
     Parser_Type();
-    
+
     while( Lexer_Match( TokenType ) )
     {
         Parser_Type();
@@ -95,7 +95,7 @@ void Parser_Type( void )
     {
         return;
     }
-    
+
     Debug( "Type: %1.*s", Lexer_GetLength(), Lexer_GetText() );
     Lexer_Advance();
 }
@@ -109,7 +109,7 @@ void Parser_Identifier( void )
     {
         return;
     }
-    
+
     Debug( "ID: %1.*s", Lexer_GetLength(), Lexer_GetText() );
     Lexer_Advance();
 }

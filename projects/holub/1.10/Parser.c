@@ -43,10 +43,10 @@ void Parser_Statements( void )
     while( Lexer_Match( TokenEnd ) == false )
     {
         const char * tmp;
-        
+
         Parser_Expression( tmp = Name_NewName() );
         Name_FreeName( tmp );
-        
+
         if( Lexer_Match( TokenSemicolon ) )
         {
             Lexer_Advance();
@@ -68,13 +68,13 @@ void Parser_Expression( const char * tmp )
     {
         return;
     }
-    
+
     Parser_Term( tmp );
-    
+
     while( Lexer_Match( TokenAdd ) )
     {
         const char * tmp2;
-         
+
         Lexer_Advance();
         Parser_Term( tmp2 = Name_NewName() );
         Debug( "%s += %s", tmp, tmp2 );
@@ -92,13 +92,13 @@ void Parser_Term( const char * tmp )
     {
         return;
     }
-    
+
     Parser_Factor( tmp );
-    
+
     while( Lexer_Match( TokenMultiply ) )
     {
         const char * tmp2;
-        
+
         Lexer_Advance();
         Parser_Factor( tmp2 = Name_NewName() );
         Debug( "%s *= %s", tmp, tmp2 );
@@ -113,7 +113,7 @@ void Parser_Factor( const char * tmp )
     {
         return;
     }
-    
+
     if( Lexer_Match( TokenNumericOrID ) )
     {
         Debug( "%s = %1.*s", tmp, Lexer_GetLength(), Lexer_GetText() );
@@ -123,7 +123,7 @@ void Parser_Factor( const char * tmp )
     {
         Lexer_Advance();
         Parser_Expression( tmp );
-        
+
         if( Lexer_Match( TokenRightParenthesis ) )
         {
             Lexer_Advance();
