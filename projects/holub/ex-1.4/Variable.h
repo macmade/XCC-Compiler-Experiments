@@ -23,22 +23,50 @@
  ******************************************************************************/
 
 /*!
- * @header      Parser.h
+ * @header      Variable.h
  * @copyright   (c) 2020, Jean-David Gadina - www.xs-labs.com
  * @dicussion   Adapted from "Compiler Design in C" by Allen I. Holub.
  *              ISBN 0-13-155045-4 - https://holub.com/compiler
  */
 
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef VARIABLE_H
+#define VARIABLE_H
 
-#include <stddef.h>
-#include <stdbool.h>
 #include <stdint.h>
-#include "Lexer.h"
+#include <stddef.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "String.h"
 
-void Parser_Statements( void );
-bool Parser_Declaration( void );
-bool Parser_Name( void );
+typedef struct Variable * VariableRef;
 
-#endif /* PARSER_H */
+typedef enum
+{
+    TypeChar,
+    TypeInt,
+    TypeFloat,
+    TypeDouble,
+    TypePointer,
+    TypeStruct
+} Type;
+
+typedef enum
+{
+    QualifierConst    = 1 << 0,
+    QualifierVolatile = 1 << 1
+} Qualifier;
+
+VariableRef Variable_Create( void );
+VariableRef Variable_Retain( VariableRef var );
+void        Variable_Release( VariableRef var );
+void        Variable_SetName( VariableRef var, StringRef name );
+void        Variable_SetType( VariableRef var, Type type );
+void        Variable_AddQualifier( VariableRef var, Qualifier qualifier );
+void        Variable_RemoveQualifier( VariableRef var, Qualifier qualifier );
+bool        Variable_HasQualifier( VariableRef var, Qualifier qualifier );
+void        Variable_SetAsPointer( VariableRef var, VariableRef pointee );
+void        Variable_SetAsArray( VariableRef var, size_t size );
+void        Variable_SetAsStruct( VariableRef var, StringRef identifier );
+void        Variable_PrintDescription( VariableRef var, FILE * fh );
+
+#endif /* VARIABLE_H */

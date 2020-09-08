@@ -23,22 +23,26 @@
  ******************************************************************************/
 
 /*!
- * @header      Parser.h
+ * @header      String.h
  * @copyright   (c) 2020, Jean-David Gadina - www.xs-labs.com
  * @dicussion   Adapted from "Compiler Design in C" by Allen I. Holub.
  *              ISBN 0-13-155045-4 - https://holub.com/compiler
  */
 
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef STRING_H
+#define STRING_H
 
-#include <stddef.h>
-#include <stdbool.h>
 #include <stdint.h>
-#include "Lexer.h"
+#include <stddef.h>
 
-void Parser_Statements( void );
-bool Parser_Declaration( void );
-bool Parser_Name( void );
+typedef struct String * StringRef;
 
-#endif /* PARSER_H */
+StringRef    String_Create( void );
+StringRef    String_CreateWithCString( const char * s );
+StringRef    String_CreateWithBytes( const char * s, size_t length );
+StringRef    String_Retain( StringRef str );
+void         String_Release( StringRef str );
+const char * String_GetCString( StringRef str );
+size_t       String_GetLength( StringRef str );
+
+#endif /* STRING_H */
